@@ -2,7 +2,7 @@ function validate(){
     alert("validate funktion");
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    this.auth();
+    this.auth(username, password);
     if ( username == "test" && password == "test"){
         alert ("Login successfully");
         window.location = "success.html"; // Redirecting to other page.
@@ -21,24 +21,24 @@ function validate(){
     }
 };
 
-function auth() {
+function auth(username, password) {
      alert("auth gedrückt");
 
     $.ajax({
-        url: "https://localhost:8443/auth",
+        url: "https://192.168.0.47:8443/auth",
         type: "POST",
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify({
-            email: "admifghgf2@gmail.com",
-            password: "aaaaaaaaaa7@A"
+            email: username,
+            password: password
         }),
         success: function(response){
             console.log(response);
         }
     });
     $.ajax({
-        url: "https://localhost:8443/auth",
+        url: "https://192.168.0.47:8443/auth",
         type: "GET",
         success: function(response){
             console.log(response);
