@@ -34,6 +34,7 @@ function auth(username, password) {
         success: function(response) {
             alert("stop success");
             console.log(response["token"]);
+            localStorage.token = response["token"];
             alert("stop token");
             window.location = "faq.html"; // Redirecting to other page.
         },
@@ -47,6 +48,19 @@ function auth(username, password) {
         type: "GET",
         success: function(response){
             console.log(response);
+        }
+    });
+    $.ajax({
+        url: "https://192.168.0.47:8443/rental",
+        type: "GET",
+        beforeSend: function(xhr) {
+            if (localStorage.token) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+            }
+        },
+        success: function(response){
+            console.log(response);
+            alert("stop - rental");
         }
     });
     alert("stop");
