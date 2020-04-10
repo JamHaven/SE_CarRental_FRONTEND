@@ -11,7 +11,7 @@ function validate(){
     else{
         attempt --;// Decrementing by one.
         alert("You have left "+attempt+" attempt;");
-        // Disabling fields after 3 attempts.
+        // Disabling fields after 3 attempts. TODO: Security: Serverseitige Überprüfung!!!!
         if( attempt == 0){
             document.getElementById("username").disabled = true;
             document.getElementById("password").disabled = true;
@@ -22,8 +22,6 @@ function validate(){
 };
 
 function auth(username, password) {
-     alert("auth gedrückt");
-
     $.ajax({
         url: "https://192.168.0.47:8443/auth",
         type: "POST",
@@ -33,8 +31,15 @@ function auth(username, password) {
             email: username,
             password: password
         }),
-        success: function(response){
-            console.log(response);
+        success: function(response) {
+            alert("stop success");
+            console.log(response["token"]);
+            alert("stop token");
+            window.location = "faq.html"; // Redirecting to other page.
+        },
+        error:  function(response, textStatus) {
+            console.log(textStatus + " - " + response.responseText);
+            alert("stop error");
         }
     });
     $.ajax({
@@ -44,7 +49,7 @@ function auth(username, password) {
             console.log(response);
         }
     });
-      alert("auth over")
+    alert("stop");
    /* $.ajax({
             url: "https://localhost:8443/auth",data:{email:"test", password:"test"}
         }).then(function(data) {
