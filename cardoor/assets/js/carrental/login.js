@@ -1,9 +1,10 @@
 function logout() {
+    sessionStorage.clear();
     localStorage.clear();
-    localStorage.username = " <a href=\"index.html\">Please log in</a>";
+    sessionStorage.username = " <a href=\"index.html\">Please log in</a>";
     alert("You logged out!");
     //document.getElementById("loginMessage").innerHTML = "You successfully logged out!";
-};
+}
 
 
 function authenticate() {
@@ -11,7 +12,6 @@ function authenticate() {
     var password = document.getElementById("password").value;
     $.ajax({
         url: globalCarrentalUrl + "/auth",
-
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -21,14 +21,14 @@ function authenticate() {
         }),
     }).success(function (response) {
         //alert("success");
-        console.log("Success! Token: " + response["token"]);
-        localStorage.token = response["token"];
-        localStorage.username = username;
-        window.location.replace(globalFrontendUrl + "/home.html");
+        console.log("Success! "+response);
+        //localStorage.token = response["token"];
+        sessionStorage.username = username;
+        window.location.replace(globalFrontendUrl + "/cardoor/home.html");
     }).fail(function (xhr, ajaxOptions, thrownError) {
-        alert(JSON.parse(xhr.responseText).message);
+        console.error(xhr);
     });
-};
+}
 
 function register() {
     var username = document.getElementById("username").value;
@@ -53,28 +53,5 @@ function register() {
     }).fail(function (xhr, ajaxOptions, thrownError) {
         alert(JSON.parse(xhr.responseText).message);
     });
-};
-/*
-    $.ajax({
-        url: "https://localhost:8443/auth",
-        type: "GET",
-        success: function(response){
-            console.log(response);
-        }
-    });
-    $.ajax({
-        url: "https://localhost:8443/cars",
-        type: "GET",
-        beforeSend: function(xhr) {
-            if (localStorage.token) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
-            }
-        },
-        success: function(response){
-            console.log(response);
-            alert("stop - rental");
-        },
-        error: function(response){
-            window.location.replace("http://localhost/loginAgain.html");
-        }
-    });*/
+}
+

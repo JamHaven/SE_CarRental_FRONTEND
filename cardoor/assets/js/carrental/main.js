@@ -1,6 +1,7 @@
 //Global variables
 
-globalCarrentalUrl = "https://localhost:8443";
-globalFrontendUrl = "http://localhost";
+// PRODUCTIVE : "https://carrental-backend.azurewebsites.net"
+var globalCarrentalUrl = "http://localhost:443";
+var globalFrontendUrl = "http://localhost";
 
-document.getElementById("usernameBanner").innerHTML = " " + localStorage.username;
+document.getElementById("usernameBanner").innerHTML = " " + sessionStorage.username;
