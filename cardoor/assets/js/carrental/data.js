@@ -1,19 +1,20 @@
 
 function carDetailButton(id) {
-  alert(id);
+  /*alert(id);
   var idStr = id.find(".car-button").text;
   alert(idStr);
   var idStr = id.innerHTML;
   alert(idStr);
   //var idStr = id.substring(id.indexOf(" "));
-
+*/
   $.ajax({
-    url: globalCarrentalUrl + "/cars/" + idStr,
+    url: globalCarrentalUrl + "/cars/" + 2,
+    credentials: 'same-origin',
     type: "GET",
   }).success(function (response) {
     console.log(response);
     var datarow = $("#datarow");
-    // var test="";
+    
     var singleCarContainer = $('#CARTEMPLATE');
 
     for (var i = 0; i < response.length; i++) {
