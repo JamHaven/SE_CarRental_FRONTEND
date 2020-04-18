@@ -4,9 +4,9 @@ var prodCarrental = "https://carrental-backend.azurewebsites.net";
 
 var globalCarrentalUrl = prodCarrental;
 
-var devFrontend = "http://192.168.0.47:8000";
+var devFrontend = "http://localhost";
 var prodFrontend = "http://carrental-frontend.azurewebsites.net";
 
-var globalFrontendUrl = devFrontend;
+var globalFrontendUrl = prodFrontend;
 
 document.getElementById("usernameBanner").innerHTML = " " + sessionStorage.username;
