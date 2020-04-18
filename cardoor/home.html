@@ -40,7 +40,9 @@
 
 <body class="loader-active" onload="loadData()">
 
+
     <!--== Preloader Area Start ==-->
+    <script src="assets/js/carrental/data.js"></script> <!-- has to be on top because of loading priorities-->
     <div class="preloader">
         <div class="preloader-spinner">
             <div class="loader-content">
@@ -160,7 +162,10 @@
         </div>
     </section>
     <!--== SlideshowBg Area End ==-->
-
+    <div id="map"></div>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhytf9oOX395MJdo4GmJC5XFO2UVH-AP4&callback=initMap">
+    </script>
     <!--== Car List Area Start ==-->
     <section id="car-list-area" class="section-padding">
         <div class="container">
@@ -242,7 +247,7 @@
                             Copyright &copy;
                             <script>document.write(new Date().getFullYear());</script> All rights reserved | This
                             template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                                href="https://colorlib.com" target="_blank" rel="noopener noreferrer" Colorlib</a>
+                                href="https://colorlib.com" target="_blank" rel="noopener noreferrer" Colorlib></a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
@@ -293,7 +298,6 @@
     <!--=== CAR RENTAL ===-->
     <script src="assets/js/carrental/login.js"></script>
     <script src="assets/js/carrental/main.js"></script>
-    <script src="assets/js/carrental/data.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,3 @@
-
 function carDetailButton(id) {
   /*alert(id);
   var idStr = id.find(".car-button").text;
@@ -107,6 +106,54 @@ function mybookings() {
   }).fail(function (response) {
     console.error(response);
   });
+}
+
+//Global function so it can be accessed by home.html
+window.initMap =function(){
+  //This could probably optimized but freshly queries the cars from the backend
+  $.ajax({
+    url: globalCarrentalUrl + "/cars",
+    crossDomain: true,
+    //xhrFields: { withCredentials: true },
+    type: "GET",
+    beforeSend: function (xhr) {
+      if (localStorage.token) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+      }
+    },
+  }).success(function (response) {
+
+
+    let geoJson= {
+      "type": "FeatureCollection",
+      "features": []};
+
+    let feature = {};
+
+    //Parse response and change the inputs into geoJSON - feature format
+    for (let i = 0; i < response.length; i++) {
+      feature = {};
+      feature["type"] = "Feature";
+      feature["geometry"] = {"type": "Point", "coordinates": [response[i].longitude, response[i].latitude]};
+      feature["properties"] = {"cartype": response[i].type};
+      geoJson.features.push(feature);
+    }
+    //Initialize the map
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: {lat: 48.217627, lng: 16.395179}
+    });
+
+    //Add the parsed geoJSON data into the google Maps map
+    map.data.addGeoJson(geoJson);
+
+  }).fail(function (response) {
+    console.error(response);
+  });
+
+
+
+
 }
 
 
