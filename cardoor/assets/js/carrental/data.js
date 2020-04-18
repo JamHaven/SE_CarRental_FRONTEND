@@ -1,19 +1,27 @@
 
-function carDetailButton(id) {
-  /*alert(id);
-  var idStr = id.find(".car-button").text;
-  alert(idStr);
-  var idStr = id.innerHTML;
-  alert(idStr);
-  //var idStr = id.substring(id.indexOf(" "));
-*/
+function loadNewCarPage(id){
   var idStr = id.textContent;
-  var idStr = idStr.substring(idStr.indexOf(" ") + 4);
-  alert(idStr);
+   idStr = idStr.substring(idStr.indexOf(" ") + 5);
+  window.location.replace(globalFrontendUrl + "/cardoor/bookcar.html?ID="+idStr);
+   
+}
+
+function carDetailPage() {
+ 
+  var parameters = location.search.substring(1).split("&");
+
+  var temp = parameters[0].split("=");
+  var id = unescape(temp[1]);
+  //alert(id);
+  //var idStr = idTEMP;
+  //var id = idStr.substring(idStr.indexOf(" ") + 4);
+  //alert(id);
+  
   $.ajax({
-    url: globalCarrentalUrl + "/cars/" + idStr,
+    url: globalCarrentalUrl + "/cars/" + id,
     //credentials: 'same-origin',
     type: "GET",
+    contentType: "application/json; charset=utf-8",
     beforeSend: function (xhr) {
       if (localStorage.token) {
         xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
@@ -21,8 +29,8 @@ function carDetailButton(id) {
     },
   }).success(function (response) {
     console.log(response);
-    window.location.replace(globalFrontendUrl + "/cardoor/bookcar.html");
-    var datarow = $("#datarow");
+    alert("success");
+    /*var datarow = $("#datarow");
 
     var singleCarContainer = $('#CARTEMPLATE');
 
@@ -34,7 +42,7 @@ function carDetailButton(id) {
       console.log(response[i].title);
 
       datarow.append(singleCarContainer.html());
-    }
+    }*/
     // datarow.append(test);
   }).fail(function (response) {
     console.error(response);
