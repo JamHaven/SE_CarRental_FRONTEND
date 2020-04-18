@@ -1,8 +1,27 @@
 function logout() {
+    $.ajax({
+        url: globalCarrentalUrl + "/logout",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        //dataType: "json",
+    }).success(function (response) {
+        sessionStorage.clear();
+    localStorage.clear();
+    sessionStorage.username = " <a href=\"index.html\">Please log in</a>";
+    alert("You logged out!");
+        console.log("Success! "+response);
+        //localStorage.token = response["token"];
+        //sessionStorage.username = username;
+        //window.location.replace(globalFrontendUrl + "/cardoor/home.html");
+    }).fail(function (xhr, ajaxOptions, thrownError) {
+        console.error(xhr);
+    });
     sessionStorage.clear();
     localStorage.clear();
     sessionStorage.username = " <a href=\"index.html\">Please log in</a>";
     alert("You logged out!");
+    
+    
     //document.getElementById("loginMessage").innerHTML = "You successfully logged out!";
 }
 
@@ -15,6 +34,8 @@ function authenticate() {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        crossDomain: true,
+        //xhrFields: { withCredentials: true },
         data: JSON.stringify({
             email: username,
             password: password
@@ -22,7 +43,7 @@ function authenticate() {
     }).success(function (response) {
         //alert("success");
         console.log("Success! "+response);
-        //localStorage.token = response["token"];
+        localStorage.token = response["token"];
         sessionStorage.username = username;
         window.location.replace(globalFrontendUrl + "/cardoor/home.html");
     }).fail(function (xhr, ajaxOptions, thrownError) {

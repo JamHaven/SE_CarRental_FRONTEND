@@ -7,19 +7,29 @@ function carDetailButton(id) {
   alert(idStr);
   //var idStr = id.substring(id.indexOf(" "));
 */
+  var idStr = id.textContent;
+  var idStr = idStr.substring(idStr.indexOf(" ") + 4);
+  alert(idStr);
   $.ajax({
-    url: globalCarrentalUrl + "/cars/" + 2,
-    credentials: 'same-origin',
+    url: globalCarrentalUrl + "/cars/" + idStr,
+    //credentials: 'same-origin',
     type: "GET",
+    beforeSend: function (xhr) {
+      if (localStorage.token) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+      }
+    },
   }).success(function (response) {
     console.log(response);
+    window.location.replace(globalFrontendUrl + "/cardoor/bookcar.html");
     var datarow = $("#datarow");
-    
+
     var singleCarContainer = $('#CARTEMPLATE');
 
     for (var i = 0; i < response.length; i++) {
       singleCarContainer.find('.car-description').text(response[i].id);
-      singleCarContainer.find('.rent-btn').id(response[i].id);
+      singleCarContainer.find('.rent-btn').text(response[i].id);
+
       singleCarContainer.find('.car-title').text(response[i].type);
       console.log(response[i].title);
 
@@ -32,11 +42,20 @@ function carDetailButton(id) {
 
 }
 
+function stopBooking(id) { }
+
 function loadData() {
   document.getElementById("CARTEMPLATE").style.display = "none";
   $.ajax({
     url: globalCarrentalUrl + "/cars",
+    crossDomain: true,
+    //xhrFields: { withCredentials: true },
     type: "GET",
+    beforeSend: function (xhr) {
+      if (localStorage.token) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+      }
+    },
   }).success(function (response) {
     console.log(response);
     var datarow = $("#datarow");
@@ -45,7 +64,8 @@ function loadData() {
 
     for (var i = 0; i < response.length; i++) {
       singleCarContainer.find('.car-description').text(response[i].id);
-      singleCarContainer.find(".rent-btn").text("Book Car "+response[i].id);
+      singleCarContainer.find(".rent-btn").text("Book Car " + response[i].id);
+
       singleCarContainer.find('.car-title').text(response[i].type);
       console.log(response[i].title);
 
@@ -55,8 +75,39 @@ function loadData() {
   }).fail(function (response) {
     console.error(response);
   });
-
-
 }
+
+function mybookings() {
+  document.getElementById("CARTEMPLATE").style.display = "none";
+  $.ajax({
+    url: globalCarrentalUrl + "/rental",
+    crossDomain: true,
+    //xhrFields: { withCredentials: true },
+    type: "GET",
+    beforeSend: function (xhr) {
+      if (localStorage.token) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+      }
+    },
+  }).success(function (response) {
+    console.log(response);
+    var datarow = $("#datarow");
+    // var test="";
+    var singleCarContainer = $('#CARTEMPLATE');
+
+    for (var i = 0; i < response.length; i++) {
+      singleCarContainer.find('.car-description').text(response[i].id);
+      singleCarContainer.find(".rent-btn").text("Stop Booking for Car " + response[i].id);
+      singleCarContainer.find('.car-title').text(response[i].type);
+      console.log(response[i].title);
+
+      datarow.append(singleCarContainer.html());
+    }
+    // datarow.append(test);
+  }).fail(function (response) {
+    console.error(response);
+  });
+}
+
 
 

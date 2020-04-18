@@ -1,11 +1,12 @@
 //Global variables
+var devCarrental = "http://localhost:443";
+var prodCarrental = "https://carrental-backend.azurewebsites.net";
 
-// PRODUCTIVE : "https://carrental-backend.azurewebsites.net"
-// DEV : "http://localhost:443";
-var globalCarrentalUrl = "https://carrental-backend.azurewebsites.net";
+var globalCarrentalUrl = prodCarrental;
 
-// PRODUCTIVE : "http://carrental-frontend.azurewebsites.net"
-// DEV : "http://localhost"
-var globalFrontendUrl = "http://carrental-frontend.azurewebsites.net/";
+var devFrontend = "http://localhost";
+var prodFrontend = "http://carrental-frontend.azurewebsites.net";
+
+var globalFrontendUrl = devFrontend;
 
 document.getElementById("usernameBanner").innerHTML = " " + sessionStorage.username;
