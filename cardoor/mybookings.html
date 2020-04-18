@@ -62,7 +62,15 @@
                     </div>
                     <!--== Username End ==-->
                     <div class="col-lg-3 text-center"></div>
-                    <div class="col-lg-3 text-center"></div>
+                    <div class="col-lg-3 text-center">
+                        <i id="Currency" class="fa fa-money"> </i>
+                        <select name=selectCurrency onchange='changeCurrency(this);'>
+                            <option selected>Change Currency</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                    </div>
+
 
                     <!--== Logout Start ==-->
                     <div class="col-lg-3 text-right">
@@ -144,8 +152,7 @@
                                         <div class="car-list-info without-bar">
                                             <h2><a href="#" class="car-title">Aston Martin One-77</a></h2>
                                             <h5 id="car-description" class="car-description">39$ Rent /per a day</h5>
-                                            <p>Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean
-                                                inorci luctus et ultrices posuere cubilia.</p>
+                                            <p> - </p>
                                             <ul class="car-info-list">
                                                 <li>AC</li>
                                                 <li>Diesel</li>

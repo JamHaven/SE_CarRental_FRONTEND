@@ -89,6 +89,7 @@
                         <nav class="mainmenu alignright">
                             <ul>
                                 <li><a href="home.html">Home</a></li>
+                                <li><a href="mybookings.html">My Bookings</a></li>
                                 <li><a href="about.html">About us</a></li>
                                 <li><a href="register.html">Register</a></li>
                                 <li><a href="../index.html">Login</a></li>
@@ -148,6 +149,14 @@
                                 <div class="password">
                                     <input type="password" placeholder="Password" id="password">
                                 </div>
+                                <div class="currency">
+                                    
+                                    <select  name=selectCurrency id="currency">
+                                        <option selected>Select currency</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
                                 <div class="log-btn">
                                     <button type="submit" onclick="register(); return false;"><i
                                             class="fa fa-check-square"></i> Sign Up</button>
@@ -179,7 +188,7 @@
                             Copyright &copy;
                             <script>document.write(new Date().getFullYear());</script> All rights reserved | This
                             template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                                href="https://colorlib.com"  rel="noopener noreferrer" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>

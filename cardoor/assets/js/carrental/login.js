@@ -54,6 +54,7 @@ function authenticate() {
 function register() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
+    var currency = document.getElementById("currency").value;
     $.ajax({
         url: globalCarrentalUrl + "/registration",
 
@@ -62,7 +63,8 @@ function register() {
         dataType: "json",
         data: JSON.stringify({
             email: username,
-            password: password
+            password: password,
+            currency: currency
         }),
     }).success(function (response) {
         //alert("success");
