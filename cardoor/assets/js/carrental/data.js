@@ -148,7 +148,7 @@ function loadData() {
     for (var i = 0; i < response.length; i++) {
       singleCarContainer.find('.car-description').text(response[i].id);
       singleCarContainer.find(".rent-btn").text("Book Car " + response[i].id);
-      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].pricePerHour+" "+currency);
+      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].priceperhour+" "+currency);
       singleCarContainer.find('.car-title').text(response[i].type);
       console.log(response[i].title);
 
@@ -201,6 +201,7 @@ function mybookings() {
   });
 }
 
+var infowindow;
 //Global function so it can be accessed by home.html
 window.initMap = function () {
   //This could probably optimized but freshly queries the cars from the backend
@@ -229,7 +230,7 @@ window.initMap = function () {
       feature = {};
       feature["type"] = "Feature";
       feature["geometry"] = { "type": "Point", "coordinates": [response[i].longitude, response[i].latitude] };
-      feature["properties"] = { "cartype": response[i].type, "priceperhour": response[i].priceperhour };
+      feature["properties"] = { "cartype": response[i].type, "priceperhour": response[i].pricePerHour };
       geoJson.features.push(feature);
     }
     //Initialize the map
