@@ -148,7 +148,7 @@ function loadData() {
     for (var i = 0; i < response.length; i++) {
       singleCarContainer.find('.car-description').text(response[i].id);
       singleCarContainer.find(".rent-btn").text("Book Car " + response[i].id);
-      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].priceperhour+" "+currency);
+      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].priceperhour+" "+getCurrencyValue());
       singleCarContainer.find('.car-title').text(response[i].type);
       console.log(response[i].title);
 
@@ -244,7 +244,8 @@ window.initMap = function () {
     map.data.addGeoJson(geoJson);
     map.data.addListener('click', function (event) {
       var feat = event.feature;
-      var html = "Available cartype: <b>" + feat.getProperty('cartype') + "<br> Price per hour: " + feat.getProperty('priceperhour');
+      var html = "Available cartype: <b>" + feat.getProperty('cartype') +
+          "<br> Price per hour: " + feat.getProperty('priceperhour') + " "+ getCurrencyValue();
       infowindow.setContent(html);
       infowindow.setPosition(event.latLng);
       infowindow.setOptions({pixelOffset: new google.maps.Size(0, -34)});
