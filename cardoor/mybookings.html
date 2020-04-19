@@ -38,7 +38,7 @@
     <![endif]-->
 </head>
 
-<body class="loader-active" onload="mybookings()">
+<body class="loader-active" onload="mybookings();getCurrency();">
 
     <!--== Preloader Area Start ==-->
     <div class="preloader">
@@ -61,7 +61,7 @@
                         <i id="usernameBanner" class="fa fa-user"> </i>
                     </div>
                     <!--== Username End ==-->
-                    <div class="col-lg-3 text-center"></div>
+                    <div  id="Currency" class="col-lg-3 text-center"> - </div>
                     <div class="col-lg-3 text-center">
                         <i id="Currency" class="fa fa-money"> </i>
                         <select name=selectCurrency onchange='changeCurrency(this);'>
