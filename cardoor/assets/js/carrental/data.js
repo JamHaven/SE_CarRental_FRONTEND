@@ -229,7 +229,7 @@ window.initMap = function () {
       feature = {};
       feature["type"] = "Feature";
       feature["geometry"] = { "type": "Point", "coordinates": [response[i].longitude, response[i].latitude] };
-      feature["properties"] = { "cartype": response[i].type };
+      feature["properties"] = { "cartype": response[i].type, "priceperhour": response[i].priceperhour };
       geoJson.features.push(feature);
     }
     //Initialize the map
@@ -240,7 +240,14 @@ window.initMap = function () {
 
     //Add the parsed geoJSON data into the google Maps map
     map.data.addGeoJson(geoJson);
-
+    map.data.addListener('click', function (event) {
+      var feat = event.feature;
+      var html = "Available cartype: <b>" + feat.getProperty('cartype') + "<br> Price per hour: " + feat.getProperty('priceperhour');
+      infowindow.setContent(html);
+      infowindow.setPosition(event.latLng);
+      infowindow.setOptions({pixelOffset: new google.maps.Size(0, -34)});
+      infowindow.open(map);
+    });
   }).fail(function (response) {
     console.error(response);
   });
