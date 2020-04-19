@@ -201,9 +201,10 @@ function mybookings() {
   });
 }
 
-var infowindow;
+
 //Global function so it can be accessed by home.html
 window.initMap = function () {
+  var infowindow = new google.maps.InfoWindow();
   //This could probably optimized but freshly queries the cars from the backend
   $.ajax({
     url: globalCarrentalUrl + "/cars",
