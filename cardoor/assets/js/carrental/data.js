@@ -228,6 +228,7 @@ window.initMap = function () {
 
 //Global function so it can be accessed by home.html
 window.initMap =function(){
+  var infowindow = new google.maps.InfoWindow();
   //This could probably optimized but freshly queries the cars from the backend
   $.ajax({
     url: globalCarrentalUrl + "/cars",
@@ -264,7 +265,14 @@ window.initMap =function(){
 
     //Add the parsed geoJSON data into the google Maps map
     map.data.addGeoJson(geoJson);
-
+    map.data.addListener('click', function (event) {
+      var feat = event.feature;
+      var html = "Available cartype: <b>" + feat.getProperty('cartype');
+      infowindow.setContent(html);
+      infowindow.setPosition(event.latLng);
+      infowindow.setOptions({pixelOffset: new google.maps.Size(0, -34)});
+      infowindow.open(map);
+    });
   }).fail(function (response) {
     console.error(response);
   });
