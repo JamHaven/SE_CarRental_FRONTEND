@@ -35,7 +35,7 @@ function carDetailPage() {
 
     //for (var i = 0; i < response.length; i++) {
     singleCarContainer.find('.car-description').text(response.id);
-    singleCarContainer.find('.car-price').text("Car price: " + response.price);
+    singleCarContainer.find('.car-price').text("Car price /h: " + response.pricePerHour);
     singleCarContainer.find('.rent-btn').text("Book " + response.id);
 
     singleCarContainer.find('.car-title').text(response.type);
@@ -70,12 +70,35 @@ function stopBooking(id) {
       }
     },
   }).success(function (response) {
-    alert("Price: " + response["price"]);
+    alert("Total cost: " + response["price"]);
     console.log(response);
   }).fail(function (response) {
     console.error(response);
   });
 }
+
+function getCurrencyValue(){
+  
+  $.ajax({
+      url: globalCarrentalUrl + "/user",
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      beforeSend: function (xhr) {
+        if (localStorage.token) {
+          xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+        }
+      },
+    }).success(function (response) {
+     //console.log(response);
+     //var output= response["defaultCurrency"];
+    // alert(output);
+     return response["defaultCurrency"];
+    }).fail(function (response) {
+      console.error(response);
+      return("error");
+    });
+  }
+  
 
 function book(id) {
   var idStr = id.textContent;
@@ -86,7 +109,7 @@ function book(id) {
     crossDomain: true,
     contentType: "application/json; charset=utf-8",
     type: "POST",
-    data: JSON.stringify({  // ?????
+    data: JSON.stringify({  
       carId: idStr
     }),
     beforeSend: function (xhr) {
@@ -104,6 +127,8 @@ function book(id) {
 
 function loadData() {
   document.getElementById("CARTEMPLATE").style.display = "none";
+  //var currency = document.getElementById('Currency').value;
+  //alert(getCurrencyValue());
   $.ajax({
     url: globalCarrentalUrl + "/cars",
     crossDomain: true,
@@ -123,7 +148,7 @@ function loadData() {
     for (var i = 0; i < response.length; i++) {
       singleCarContainer.find('.car-description').text(response[i].id);
       singleCarContainer.find(".rent-btn").text("Book Car " + response[i].id);
-      singleCarContainer.find('.car-price').text("Car price: " + response[i].price);
+      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].pricePerHour+" "+currency);
       singleCarContainer.find('.car-title').text(response[i].type);
       console.log(response[i].title);
 
@@ -159,7 +184,7 @@ function mybookings() {
       singleCarContainer.find(".rent-btn").text("Already Stopped for "+ response[i].id);
       singleCarContainer.find(".starttime").text("Start time: " + response[i].startTime);
       singleCarContainer.find(".endtime").text("End time: " + response[i].endTime);
-      singleCarContainer.find(".price").text("Price: " + response[i].price);
+      singleCarContainer.find(".price").text("Total cost: " + response[i].price);
 
       if (response[i].endTime==null) {
         singleCarContainer.find(".endtime").text("AKTIV");

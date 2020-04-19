@@ -7,14 +7,14 @@ var globalCarrentalUrl = prodCarrental;
 var devFrontend = "http://localhost";
 var prodFrontend = "https://carrental-frontend.azurewebsites.net";
 
-var globalFrontendUrl = prodFrontend;
+var globalFrontendUrl = devFrontend;
 
 document.getElementById("usernameBanner").innerHTML = " " + sessionStorage.username;
 
 
 
 function getCurrency(){
-  var actualCurrency;
+  
   $.ajax({
       url: globalCarrentalUrl + "/user",
       //credentials: 'same-origin',
@@ -30,16 +30,14 @@ function getCurrency(){
         }
       },
     }).success(function (response) {
-      alert("Actual currency: "+SelValue);
+      //alert("Actual currency: "+SelValue);
   
       console.log(response);
-      actualCurrency = response["currency"];
+      document.getElementById("Currency").innerHTML ="Actual: "+  response["defaultCurrency"];
      
     }).fail(function (response) {
       console.error(response);
     });
-  
-      document.getElementById("Currency").innerHTML ="Actual: "+ actualCurrency+" ";
   
   }
   
@@ -63,7 +61,7 @@ function getCurrency(){
         }
       },
     }).success(function (response) {
-      alert("New currency: "+SelValue);
+      alert(response["message"]);
   
       console.log(response);
       /*var datarow = $("#datarow");
