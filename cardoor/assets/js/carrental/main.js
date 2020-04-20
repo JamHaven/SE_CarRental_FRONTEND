@@ -4,7 +4,7 @@ var prodCarrental = "https://carrental-backend.azurewebsites.net";
 
 var globalCarrentalUrl = prodCarrental;
 
-var devFrontend = "http://localhost";
+var devFrontend = "http://localhost:8000";
 var prodFrontend = "https://carrental-frontend.azurewebsites.net";
 
 var globalFrontendUrl = devFrontend;
@@ -34,7 +34,7 @@ function getCurrency(){
   
       console.log(response);
       document.getElementById("Currency").innerHTML ="Actual: "+  response["defaultCurrency"];
-     
+      localStorage.currency = response["defaultCurrency"];
     }).fail(function (response) {
       console.error(response);
     });
@@ -43,7 +43,7 @@ function getCurrency(){
   
   function changeCurrency(dropdown){
       var myindex  = dropdown.selectedIndex
-      var SelValue = dropdown.options[myindex].value
+      var selValue = dropdown.options[myindex].value
   
       
     $.ajax({
@@ -51,7 +51,7 @@ function getCurrency(){
       //credentials: 'same-origin',
       type: "PUT",
       data: JSON.stringify({
-          currency: SelValue,
+          defaultCurrency: selValue,
     
         }),
       contentType: "application/json; charset=utf-8",
@@ -64,6 +64,8 @@ function getCurrency(){
       alert(response["message"]);
   
       console.log(response);
+      localStorage.currency = selValue;
+      document.getElementById("Currency").innerHTML ="Actual: "+  selValue;
       /*var datarow = $("#datarow");
   
       var singleCarContainer = $('#CARTEMPLATE');

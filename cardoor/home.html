@@ -38,7 +38,7 @@
     <![endif]-->
 </head>
 
-<body class="loader-active" onload="loadData();getCurrency();">
+<body class="loader-active" onload="loadData();">
 
 
     <!--== Preloader Area Start ==-->
@@ -65,10 +65,8 @@
                     <div id="Currency" class="col-lg-3 text-center"> - </div>
                     <div class="col-lg-3 text-center">
                         <i  class="fa fa-money"> </i>
-                        <select name=selectCurrency onchange='changeCurrency(this);'>
+                        <select id="currencyDropDown" name=selectCurrency onchange='changeCurrency(this);'>
                             <option selected>Change Currency</option>
-                            <option value="USD">USD</option>
-                            <option value="EUR">EUR</option>
                         </select>
                     </div>
 
@@ -305,6 +303,12 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhytf9oOX395MJdo4GmJC5XFO2UVH-AP4&callback=initMap">
     </script>
+<script>
+    $(document).ready(function(){
+        getCurrency();
+        populateCurrencyDropbox();
+    });
+</script>
 </body>
 
 </html>
