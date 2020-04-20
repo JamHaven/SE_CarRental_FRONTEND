@@ -77,6 +77,7 @@ function stopBooking(id) {
   });
 }
 
+//TPDP Redundant? Remove?
 function getCurrencyValue(){
   
   $.ajax({
@@ -98,7 +99,28 @@ function getCurrencyValue(){
       return("error");
     });
   }
-  
+
+  function populateCurrencyDropbox() {
+    $.ajax({
+      url: globalCarrentalUrl + "/currencies",
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      beforeSend: function (xhr) {
+        if (localStorage.token) {
+          xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+        }
+      },
+    }).success(function (response) {
+      var len = response.length;
+
+      $("#currencyDropDown").empty().append("<option selected>Change Currency</option>");
+      for (var i = 0; i < len; i++) {
+        var currency = response[i];
+
+        $("#currencyDropDown").append("<option value='" + currency + "'>" + currency + "</option>");
+      }
+    });
+  }
 
 function book(id) {
   var idStr = id.textContent;
@@ -148,7 +170,7 @@ function loadData() {
     for (var i = 0; i < response.length; i++) {
       singleCarContainer.find('.car-description').text(response[i].id);
       singleCarContainer.find(".rent-btn").text("Book Car " + response[i].id);
-      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].priceperhour+" "+getCurrencyValue());
+      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].pricePerHour+" "+ localStorage.currency);
       singleCarContainer.find('.car-title').text(response[i].type);
       console.log(response[i].title);
 
@@ -245,7 +267,7 @@ window.initMap = function () {
     map.data.addListener('click', function (event) {
       var feat = event.feature;
       var html = "Available cartype: <b>" + feat.getProperty('cartype') +
-          "<br> Price per hour: " + feat.getProperty('priceperhour') + " "+ getCurrencyValue();
+          "<br> Price per hour: " + Math.round((feat.getProperty('priceperhour') + Number.EPSILON) * 100) / 100 + " "+ localStorage.currency;
       infowindow.setContent(html);
       infowindow.setPosition(event.latLng);
       infowindow.setOptions({pixelOffset: new google.maps.Size(0, -34)});
