@@ -59,8 +59,13 @@
                         <i id="usernameBanner" class="fa fa-user"> </i>
                     </div>
                     <!--== Username End ==-->
-                    <div class="col-lg-3 text-center"></div>
-                    <div class="col-lg-3 text-center"></div>
+                    <div id="Currency" class="col-lg-3 text-center"> - </div>
+                    <div class="col-lg-3 text-center">
+                        <i class="fa fa-money"> </i>
+                        <select id="currencyDropDown" name=selectCurrency onchange='changeCurrency(this);'>
+                            <option selected>Change Currency</option>
+                        </select>
+                    </div>
 
                     <!--== Logout Start ==-->
                     <div class="col-lg-3 text-right">
@@ -150,8 +155,8 @@
                                     <input type="password" placeholder="Password" id="password">
                                 </div>
                                 <div class="currency">
-                                    
-                                    <select  name=selectCurrency id="currency">
+
+                                    <select name=selectCurrency id="currency">
                                         <option selected>Select currency</option>
                                         <option value="USD">USD</option>
                                         <option value="EUR">EUR</option>
@@ -188,7 +193,7 @@
                             Copyright &copy;
                             <script>document.write(new Date().getFullYear());</script> All rights reserved | This
                             template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                                href="https://colorlib.com"  rel="noopener noreferrer" target="_blank">Colorlib</a>
+                                href="https://colorlib.com" rel="noopener noreferrer" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
@@ -239,6 +244,12 @@
     <!--=== CAR RENTAL ===-->
     <script src="assets/js/carrental/login.js"></script>
     <script src="assets/js/carrental/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            getCurrency();
+            populateCurrencyDropbox();
+        });
+    </script>
 </body>
 
 </html>

@@ -38,7 +38,7 @@
     <![endif]-->
 </head>
 
-<body class="loader-active" onload="mybookings();getCurrency();">
+<body class="loader-active" onload="mybookings();">
 
     <!--== Preloader Area Start ==-->
     <div class="preloader">
@@ -61,13 +61,11 @@
                         <i id="usernameBanner" class="fa fa-user"> </i>
                     </div>
                     <!--== Username End ==-->
-                    <div  id="Currency" class="col-lg-3 text-center"> - </div>
+                    <div id="Currency" class="col-lg-3 text-center"> - </div>
                     <div class="col-lg-3 text-center">
-                        <i id="Currency" class="fa fa-money"> </i>
-                        <select name=selectCurrency onchange='changeCurrency(this);'>
+                        <i  class="fa fa-money"> </i>
+                        <select id="currencyDropDown" name=selectCurrency onchange='changeCurrency(this);'>
                             <option selected>Change Currency</option>
-                            <option value="USD">USD</option>
-                            <option value="EUR">EUR</option>
                         </select>
                     </div>
 
@@ -269,6 +267,12 @@
     <script src="assets/js/carrental/login.js"></script>
     <script src="assets/js/carrental/main.js"></script>
     <script src="assets/js/carrental/data.js"></script>
+    <script>
+        $(document).ready(function () {
+            getCurrency();
+            populateCurrencyDropbox();
+        });
+    </script>
 </body>
 
 </html>

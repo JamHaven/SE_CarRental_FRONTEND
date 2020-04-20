@@ -12,14 +12,9 @@ function carDetailPage() {
 
   var temp = parameters[0].split("=");
   var id = unescape(temp[1]);
-  //alert(id);
-  //var idStr = idTEMP;
-  //var id = idStr.substring(idStr.indexOf(" ") + 4);
-  //alert(id);
 
   $.ajax({
     url: globalCarrentalUrl + "/cars/" + id,
-    //credentials: 'same-origin',
     type: "GET",
     contentType: "application/json; charset=utf-8",
     beforeSend: function (xhr) {
@@ -33,9 +28,8 @@ function carDetailPage() {
 
     var singleCarContainer = $('#CARTEMPLATE');
 
-    //for (var i = 0; i < response.length; i++) {
     singleCarContainer.find('.car-description').text(response.id);
-    singleCarContainer.find('.car-price').text("Car price /h: " + response.pricePerHour);
+    singleCarContainer.find('.car-price').text("Car price /h: " + response.pricePerHour + " " + localStorage.currency);
     singleCarContainer.find('.rent-btn').text("Book " + response.id);
 
     singleCarContainer.find('.car-title').text(response.type);
@@ -43,8 +37,6 @@ function carDetailPage() {
     datarow.append(singleCarContainer.html());
 
     $("#car-list-area").find('.rent-btn').text("Book Car " + response.id);
-    //}
-    // datarow.append(test);
   }).fail(function (response) {
     console.error(response);
   });
@@ -54,7 +46,6 @@ function carDetailPage() {
 function stopBooking(id) {
   var idStr = id.textContent;
   idStr = idStr.substring(20);
-  //alert(idStr);
   $.ajax({
     url: globalCarrentalUrl + "/rental/" + idStr,
     crossDomain: true,
@@ -77,39 +68,37 @@ function stopBooking(id) {
   });
 }
 
-function getCurrencyValue(){
-  
+function populateCurrencyDropbox() {
   $.ajax({
-      url: globalCarrentalUrl + "/user",
-      type: "GET",
-      contentType: "application/json; charset=utf-8",
-      beforeSend: function (xhr) {
-        if (localStorage.token) {
-          xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
-        }
-      },
-    }).success(function (response) {
-     //console.log(response);
-     //var output= response["defaultCurrency"];
-    // alert(output);
-     return response["defaultCurrency"];
-    }).fail(function (response) {
-      console.error(response);
-      return("error");
-    });
-  }
-  
+    url: globalCarrentalUrl + "/currencies",
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    beforeSend: function (xhr) {
+      if (localStorage.token) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+      }
+    },
+  }).success(function (response) {
+    var len = response.length;
+
+    $("#currencyDropDown").empty().append("<option selected>Change Currency</option>");
+    for (var i = 0; i < len; i++) {
+      var currency = response[i];
+
+      $("#currencyDropDown").append("<option value='" + currency + "'>" + currency + "</option>");
+    }
+  });
+}
 
 function book(id) {
   var idStr = id.textContent;
   idStr = idStr.substring(9);
-  // alert(idStr);
   $.ajax({
     url: globalCarrentalUrl + "/rental",
     crossDomain: true,
     contentType: "application/json; charset=utf-8",
     type: "POST",
-    data: JSON.stringify({  
+    data: JSON.stringify({
       carId: idStr
     }),
     beforeSend: function (xhr) {
@@ -127,12 +116,9 @@ function book(id) {
 
 function loadData() {
   document.getElementById("CARTEMPLATE").style.display = "none";
-  //var currency = document.getElementById('Currency').value;
-  //alert(getCurrencyValue());
   $.ajax({
     url: globalCarrentalUrl + "/cars",
     crossDomain: true,
-    //xhrFields: { withCredentials: true },
     type: "GET",
     beforeSend: function (xhr) {
       if (localStorage.token) {
@@ -142,19 +128,17 @@ function loadData() {
   }).success(function (response) {
     console.log(response);
     var datarow = $("#datarow");
-    // var test="";
     var singleCarContainer = $('#CARTEMPLATE');
 
     for (var i = 0; i < response.length; i++) {
       singleCarContainer.find('.car-description').text(response[i].id);
       singleCarContainer.find(".rent-btn").text("Book Car " + response[i].id);
-      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].priceperhour+" "+getCurrencyValue());
+      singleCarContainer.find('.car-price').text("Car price /h: " + response[i].pricePerHour + " " + localStorage.currency);
       singleCarContainer.find('.car-title').text(response[i].type);
       console.log(response[i].title);
 
       datarow.append(singleCarContainer.html());
     }
-    // datarow.append(test);
   }).fail(function (response) {
     console.error(response);
   });
@@ -165,7 +149,6 @@ function mybookings() {
   $.ajax({
     url: globalCarrentalUrl + "/rental",
     crossDomain: true,
-    //xhrFields: { withCredentials: true },
     type: "GET",
     beforeSend: function (xhr) {
       if (localStorage.token) {
@@ -175,19 +158,18 @@ function mybookings() {
   }).success(function (response) {
     console.log(response);
     var datarow = $("#datarow");
-    // var test="";
     var singleCarContainer = $('#CARTEMPLATE');
 
     for (var i = 0; i < response.length; i++) {
       singleCarContainer.find('.car-title').text("Car ID " + response[i].carId);
       singleCarContainer.find('.car-description').text("Booking ID " + response[i].id);
-      singleCarContainer.find(".rent-btn").text("Already Stopped for "+ response[i].id);
+      singleCarContainer.find(".rent-btn").text("Already Stopped for " + response[i].id);
       singleCarContainer.find(".starttime").text("Start time: " + response[i].startTime);
       singleCarContainer.find(".endtime").text("End time: " + response[i].endTime);
-      singleCarContainer.find(".price").text("Total cost: " + response[i].price);
+      singleCarContainer.find(".price").text("Total cost: " + response[i].price + " " + localStorage.currency);
 
-      if (response[i].endTime==null) {
-        singleCarContainer.find(".endtime").text("AKTIV");
+      if (response[i].endTime == null) {
+        singleCarContainer.find(".endtime").text("ACTIVE");
         singleCarContainer.find(".rent-btn").text("Stop Booking for ID " + response[i].id);
         singleCarContainer.find(".price").text("Price: not available yet");
       }
@@ -195,7 +177,6 @@ function mybookings() {
 
       datarow.append(singleCarContainer.html());
     }
-    // datarow.append(test);
   }).fail(function (response) {
     console.error(response);
   });
@@ -209,7 +190,6 @@ window.initMap = function () {
   $.ajax({
     url: globalCarrentalUrl + "/cars",
     crossDomain: true,
-    //xhrFields: { withCredentials: true },
     type: "GET",
     beforeSend: function (xhr) {
       if (localStorage.token) {
@@ -245,10 +225,10 @@ window.initMap = function () {
     map.data.addListener('click', function (event) {
       var feat = event.feature;
       var html = "Available cartype: <b>" + feat.getProperty('cartype') +
-          "<br> Price per hour: " + feat.getProperty('priceperhour') + " "+ getCurrencyValue();
+        "<br> Price per hour: " + Math.round((feat.getProperty('priceperhour') + Number.EPSILON) * 100) / 100 + " " + localStorage.currency;
       infowindow.setContent(html);
       infowindow.setPosition(event.latLng);
-      infowindow.setOptions({pixelOffset: new google.maps.Size(0, -34)});
+      infowindow.setOptions({ pixelOffset: new google.maps.Size(0, -34) });
       infowindow.open(map);
     });
   }).fail(function (response) {

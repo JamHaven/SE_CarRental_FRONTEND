@@ -60,8 +60,13 @@
                         <i id="usernameBanner" class="fa fa-user"> </i>
                     </div>
                     <!--== Username End ==-->
-                    <div class="col-lg-3 text-center"></div>
-                    <div class="col-lg-3 text-center"></div>
+                    <div id="Currency" class="col-lg-3 text-center"> - </div>
+                    <div class="col-lg-3 text-center">
+                        <i  class="fa fa-money"> </i>
+                        <select id="currencyDropDown" name=selectCurrency onchange='changeCurrency(this);'>
+                            <option selected>Change Currency</option>
+                        </select>
+                    </div>
 
                     <!--== Logout Start ==-->
                     <div class="col-lg-3 text-right">
@@ -647,6 +652,12 @@
     <!--=== CAR RENTAL ===-->
     <script src="assets/js/carrental/login.js"></script>
     <script src="assets/js/carrental/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            getCurrency();
+            populateCurrencyDropbox();
+        });
+    </script>
 </body>
 
 </html>
