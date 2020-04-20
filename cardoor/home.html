@@ -64,7 +64,7 @@
                     <!--== Username End ==-->
                     <div id="Currency" class="col-lg-3 text-center"> - </div>
                     <div class="col-lg-3 text-center">
-                        <i  class="fa fa-money"> </i>
+                        <i class="fa fa-money"> </i>
                         <select id="currencyDropDown" name=selectCurrency onchange='changeCurrency(this);'>
                             <option selected>Change Currency</option>
                         </select>
@@ -122,42 +122,7 @@
                             <div class="display-table-cell">
                                 <h1>BOOK A CAR TODAY!</h1>
                                 <p>Get your discout for FH Campus Wien students! </p>
-                                <!--
-                                <div class="book-ur-car">
-                                    <form >
-                                        <div class="pick-location bookinput-item">
-                                            <select class="custom-select">
-                                                <option selected>Pick Location</option>
-                                                <option value="1">Dhaka</option>
-                                                <option value="2">Comilla</option>
-                                                <option value="3">Barishal</option>
-                                                <option value="3">Rangpur</option>
-                                            </select>
-                                        </div>
 
-                                        <div class="pick-date bookinput-item">
-                                            <input id="startDate2" placeholder="Pick Date" />
-                                        </div>
-
-                                        <div class="retern-date bookinput-item">
-                                            <input id="endDate2" placeholder="Return Date" />
-                                        </div>
-
-                                        <div class="car-choose bookinput-item">
-                                            <select class="custom-select">
-                                                <option selected>Choose Car</option>
-                                                <option value="1">BMW</option>
-                                                <option value="2">Audi</option>
-                                                <option value="3">Lexus</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="bookcar-btn bookinput-item">
-                                            <button type="submit" onclick="loadData(); return false;">Book Car</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            -->
                             </div>
                         </div>
                     </div>
@@ -199,7 +164,6 @@
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star unmark"></i>
                                             </p>
-                                            <!--<a href="#" id="1" onclick="carDetailButton(this);return false;" class="rent-btn">Book It</a>-->
                                             <button class="rent-btn"
                                                 onclick="loadNewCarPage(this);return false;">Book</button>
                                         </div>
@@ -209,24 +173,6 @@
                             <!--Single Car End -->
                         </div>
                     </div>
-
-
-
-                    <!-- Page Pagination Start 
-                    <div class="page-pagi">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                     Page Pagination End -->
                 </div>
                 <!-- Car List Content End -->
             </div>
@@ -248,7 +194,7 @@
                             <script>document.write(new Date().getFullYear());</script> All rights reserved | This
                             template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
                                 href="https://colorlib.com" target="_blank" rel="noopener noreferrer" Colorlib></a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
                 </div>
@@ -301,14 +247,14 @@
     <script src="assets/js/carrental/data.js"></script> <!-- has to be on top because of loading priorities-->
 
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhytf9oOX395MJdo4GmJC5XFO2UVH-AP4&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhytf9oOX395MJdo4GmJC5XFO2UVH-AP4&callback=initMap">
+        </script>
+    <script>
+        $(document).ready(function () {
+            getCurrency();
+            populateCurrencyDropbox();
+        });
     </script>
-<script>
-    $(document).ready(function(){
-        getCurrency();
-        populateCurrencyDropbox();
-    });
-</script>
 </body>
 
 </html>
