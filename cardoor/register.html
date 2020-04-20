@@ -60,12 +60,7 @@
                     </div>
                     <!--== Username End ==-->
                     <div id="Currency" class="col-lg-3 text-center"> - </div>
-                    <div class="col-lg-3 text-center">
-                        <i class="fa fa-money"> </i>
-                        <select id="currencyDropDown" name=selectCurrency onchange='changeCurrency(this);'>
-                            <option selected>Change Currency</option>
-                        </select>
-                    </div>
+                    <div class="col-lg-3 text-center"> - </div>
 
                     <!--== Logout Start ==-->
                     <div class="col-lg-3 text-right">
@@ -154,15 +149,7 @@
                                 <div class="password">
                                     <input type="password" placeholder="Password" id="password">
                                 </div>
-                                <div class="currency">
-
-                                    <select name=selectCurrency id="currency">
-                                        <option selected>Select currency</option>
-                                        <option value="USD">USD</option>
-                                        <option value="EUR">EUR</option>
-                                    </select>
-                                </div>
-                                <div class="log-btn">
+                                                <div class="log-btn">
                                     <button type="submit" onclick="register(); return false;"><i
                                             class="fa fa-check-square"></i> Sign Up</button>
                                 </div>
@@ -244,12 +231,7 @@
     <!--=== CAR RENTAL ===-->
     <script src="assets/js/carrental/login.js"></script>
     <script src="assets/js/carrental/main.js"></script>
-    <script>
-        $(document).ready(function () {
-            getCurrency();
-            populateCurrencyDropbox();
-        });
-    </script>
+    
 </body>
 
 </html>
