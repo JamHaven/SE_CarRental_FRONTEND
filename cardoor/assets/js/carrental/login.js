@@ -1,6 +1,6 @@
 function logout() {
     $.ajax({
-        url: globalCarrentalUrl + "/logout",
+        url: globalCarrentalUrl + "/authentication-service/logout",
         type: "POST",
         contentType: "application/json; charset=utf-8",
     }).success(function (response) {
@@ -24,7 +24,7 @@ function authenticate() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     $.ajax({
-        url: globalCarrentalUrl + "/auth",
+        url: globalCarrentalUrl + "/authentication-service/auth",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -48,7 +48,7 @@ function register() {
     var password = document.getElementById("password").value;
     var currency = document.getElementById("currency").value;
     $.ajax({
-        url: globalCarrentalUrl + "/registration",
+        url: globalCarrentalUrl + "/authentication-service/registration",
 
         type: "POST",
         contentType: "application/json; charset=utf-8",

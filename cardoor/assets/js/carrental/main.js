@@ -1,6 +1,6 @@
 //Global variables
 var devCarrental = "http://localhost:443";
-var prodCarrental = "https://carrental-backend.azurewebsites.net";
+var prodCarrental = "https://carrental-registry.azurewebsites.net";
 
 var globalCarrentalUrl = prodCarrental;
 
@@ -16,7 +16,7 @@ document.getElementById("usernameBanner").innerHTML = " " + sessionStorage.usern
 function getCurrency() {
 
   $.ajax({
-    url: globalCarrentalUrl + "/user",
+    url: globalCarrentalUrl + "/user-service/user",
     type: "GET",
     contentType: "application/json; charset=utf-8",
     beforeSend: function (xhr) {
@@ -40,7 +40,7 @@ function changeCurrency(dropdown) {
 
 
   $.ajax({
-    url: globalCarrentalUrl + "/user",
+    url: globalCarrentalUrl + "/user-service/user",
     type: "PUT",
     data: JSON.stringify({
       defaultCurrency: selValue,

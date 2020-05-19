@@ -14,7 +14,7 @@ function carDetailPage() {
   var id = unescape(temp[1]);
 
   $.ajax({
-    url: globalCarrentalUrl + "/cars/" + id,
+    url: globalCarrentalUrl + "/car-service/cars/" + id,
     type: "GET",
     contentType: "application/json; charset=utf-8",
     beforeSend: function (xhr) {
@@ -47,7 +47,7 @@ function stopBooking(id) {
   var idStr = id.textContent;
   idStr = idStr.substring(20);
   $.ajax({
-    url: globalCarrentalUrl + "/rental/" + idStr,
+    url: globalCarrentalUrl + "/rental-service/rental/" + idStr,
     crossDomain: true,
     contentType: "application/json; charset=utf-8",
     type: "PUT",
@@ -70,7 +70,7 @@ function stopBooking(id) {
 
 function populateCurrencyDropbox() {
   $.ajax({
-    url: globalCarrentalUrl + "/currencies",
+    url: globalCarrentalUrl + "/user-service/currencies",
     type: "GET",
     contentType: "application/json; charset=utf-8",
     beforeSend: function (xhr) {
@@ -94,7 +94,7 @@ function book(id) {
   var idStr = id.textContent;
   idStr = idStr.substring(9);
   $.ajax({
-    url: globalCarrentalUrl + "/rental",
+    url: globalCarrentalUrl + "rental-service/rental",
     crossDomain: true,
     contentType: "application/json; charset=utf-8",
     type: "POST",
@@ -117,7 +117,7 @@ function book(id) {
 function loadData() {
   document.getElementById("CARTEMPLATE").style.display = "none";
   $.ajax({
-    url: globalCarrentalUrl + "/cars",
+    url: globalCarrentalUrl + "/car-service/cars",
     crossDomain: true,
     type: "GET",
     beforeSend: function (xhr) {
@@ -147,7 +147,7 @@ function loadData() {
 function mybookings() {
   document.getElementById("CARTEMPLATE").style.display = "none";
   $.ajax({
-    url: globalCarrentalUrl + "/rental",
+    url: globalCarrentalUrl + "/rental-service/rental",
     crossDomain: true,
     type: "GET",
     beforeSend: function (xhr) {
@@ -188,7 +188,7 @@ window.initMap = function () {
   var infowindow = new google.maps.InfoWindow();
   //This could probably optimized but freshly queries the cars from the backend
   $.ajax({
-    url: globalCarrentalUrl + "/cars",
+    url: globalCarrentalUrl + "/car-service/cars",
     crossDomain: true,
     type: "GET",
     beforeSend: function (xhr) {
