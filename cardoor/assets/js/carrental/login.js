@@ -48,7 +48,7 @@ function register() {
     var password = document.getElementById("password").value;
     var currency = document.getElementById("currency").value;
     $.ajax({
-        url: globalCarrentalUrl + "/authentication-service/registration",
+        url: globalCarrentalUrl + "/user-service/user",
 
         type: "POST",
         contentType: "application/json; charset=utf-8",
