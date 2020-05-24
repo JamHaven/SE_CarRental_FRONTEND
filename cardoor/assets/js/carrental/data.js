@@ -14,6 +14,9 @@ function carDetailPage() {
   var id = unescape(temp[1]);
 
   $.ajax({
+    headers: {
+      Accept: "application/json"
+    },
     url: globalCarrentalUrl + "/car-service/cars/" + id+"?curr="+localStorage.currency,
     type: "GET",
     contentType: "application/json; charset=utf-8",
@@ -47,6 +50,9 @@ function stopBooking(id) {
   var idStr = id.textContent;
   idStr = idStr.substring(20);
   $.ajax({
+    headers: {
+      Accept: "application/json"
+    },
     url: globalCarrentalUrl + "/rental-service/rental/" + idStr,
     crossDomain: true,
     contentType: "application/json; charset=utf-8",
@@ -94,6 +100,9 @@ function book(id) {
   var idStr = id.textContent;
   idStr = idStr.substring(9);
   $.ajax({
+    headers: {
+      Accept: "application/json"
+    },
     url: globalCarrentalUrl + "rental-service/rental",
     crossDomain: true,
     contentType: "application/json; charset=utf-8",
@@ -117,6 +126,9 @@ function book(id) {
 function loadData() {
   document.getElementById("CARTEMPLATE").style.display = "none";
   $.ajax({
+    headers: {
+      Accept: "application/json"
+    },
     url: globalCarrentalUrl + "/car-service/cars?curr=" +localStorage.currency,
     crossDomain: true,
     type: "GET",
@@ -147,6 +159,9 @@ function loadData() {
 function mybookings() {
   document.getElementById("CARTEMPLATE").style.display = "none";
   $.ajax({
+    headers: {
+      Accept: "application/json"
+    },
     url: globalCarrentalUrl + "/rental-service/rental",
     crossDomain: true,
     type: "GET",
@@ -188,6 +203,9 @@ window.initMap = function () {
   var infowindow = new google.maps.InfoWindow();
   //This could probably optimized but freshly queries the cars from the backend
   $.ajax({
+    headers: {
+    Accept: "application/json"
+  },
     url: globalCarrentalUrl + "/car-service/cars?curr="+localStorage.currency,
     crossDomain: true,
     type: "GET",
