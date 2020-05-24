@@ -70,7 +70,7 @@ function stopBooking(id) {
 
 function populateCurrencyDropbox() {
   $.ajax({
-    url: globalCarrentalUrl + "/user-service/currencies",
+    url: globalCarrentalUrl + "/rental-service/currencies",
     type: "GET",
     contentType: "application/json; charset=utf-8",
     beforeSend: function (xhr) {
