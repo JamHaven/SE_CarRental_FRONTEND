@@ -61,7 +61,7 @@ function register() {
     }).success(function (response) {
         console.log("Success!");
         alert(username + " registered successfully. Please log in.");
-        window.location.replace(globalFrontendUrl);
+        //window.location.replace(globalFrontendUrl);
     }).fail(function (xhr, ajaxOptions, thrownError) {
         alert(JSON.parse(xhr.responseText).message);
     });
