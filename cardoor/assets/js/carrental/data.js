@@ -103,7 +103,7 @@ function book(id) {
     headers: {
       Accept: "application/json"
     },
-    url: globalCarrentalUrl + "rental-service/rental",
+    url: globalCarrentalUrl + "/rental-service/rental",
     crossDomain: true,
     contentType: "application/json; charset=utf-8",
     type: "POST",
