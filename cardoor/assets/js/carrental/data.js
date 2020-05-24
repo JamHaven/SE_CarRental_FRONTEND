@@ -188,7 +188,7 @@ window.initMap = function () {
   var infowindow = new google.maps.InfoWindow();
   //This could probably optimized but freshly queries the cars from the backend
   $.ajax({
-    url: globalCarrentalUrl + "/car-service/cars",
+    url: globalCarrentalUrl + "/car-service/cars?curr="+localStorage.currency,
     crossDomain: true,
     type: "GET",
     beforeSend: function (xhr) {
