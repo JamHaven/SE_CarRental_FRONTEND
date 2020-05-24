@@ -49,10 +49,10 @@ function register() {
     var currency = document.getElementById("currency").value;
     $.ajax({
         url: globalCarrentalUrl + "/user-service/user",
-
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        crossDomain: true,
         data: JSON.stringify({
             email: username,
             password: password,
