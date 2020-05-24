@@ -14,7 +14,7 @@ function carDetailPage() {
   var id = unescape(temp[1]);
 
   $.ajax({
-    url: globalCarrentalUrl + "/car-service/cars/" + id,
+    url: globalCarrentalUrl + "/car-service/cars/" + id+"?curr="+localStorage.currency,
     type: "GET",
     contentType: "application/json; charset=utf-8",
     beforeSend: function (xhr) {
@@ -117,7 +117,7 @@ function book(id) {
 function loadData() {
   document.getElementById("CARTEMPLATE").style.display = "none";
   $.ajax({
-    url: globalCarrentalUrl + "/car-service/cars",
+    url: globalCarrentalUrl + "/car-service/cars?curr=" +localStorage.currency,
     crossDomain: true,
     type: "GET",
     beforeSend: function (xhr) {
