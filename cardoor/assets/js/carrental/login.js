@@ -40,6 +40,7 @@ function authenticate() {
         window.location.replace(globalFrontendUrl + "/cardoor/home.html");
     }).fail(function (xhr, ajaxOptions, thrownError) {
         console.error(xhr);
+        document.getElementById("login_failed").innerHTML = "Login Failed.";
     });
 }
 
